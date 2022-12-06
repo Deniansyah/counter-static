@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .wrapper{
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .child-wrapper{
+            display: flex;
+            gap: 15px;
+            font-size: 25px;
+        }
+        .btn button{
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+        .alert{
+            background-color: rgb(205, 92, 92);
+            border: 1px solid rgb(139, 0, 0);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="alert" class="alert">min / max exceeded</div>
+        <div class="child-wrapper">
+            <div id="decrement" class="btn">
+                <button>-</button>
+            </div>
+            <div id="num">1</div>
+            <div id="increment" class="btn">
+                <button>+</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const alertPop = document.getElementById('alert')
+    const count = document.getElementById('num')
+    const dec = document.getElementById('decrement')
+    const inc = document.getElementById('increment')
+
+    const condition = (val, cb) => {
+        if (val >= 1 && val <= 10) {
+            alertPop.style.display = 'none'
+            cb()
+        }else{
+            alertPop.style.display = 'block'
+        }
+    }
+
+    dec.addEventListener('click', () => {
+        const value = parseInt(count.textContent)
+        condition(value - 1, () => {
+            count.textContent = value - 1
+        })
+    })
+
+    inc.addEventListener('click', () => {
+        const value = parseInt(count.textContent)
+        condition(value + 1, () => {
+            count.textContent = value + 1
+        })
+    })
+</script>
+</html>
